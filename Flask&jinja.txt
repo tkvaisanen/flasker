@@ -1,0 +1,128 @@
+SERVERIN ASETTAMINEN AUTOMAATTISEEN SEURANTAAN
+
+- export FLASK_ENV=development	(Tämä on kehitysympäristö omalla koneella) (ei toimi enää versiossa 2.3)
+- export Flask_APP=hello.py	(Tämä kertoo serverille, missä ja mikä tiedosto on)
+
+VERSIO 2.3:
+------------
+FLASK_APP=hello.py FLASK_DEBUG=1 TEMPLATES_AUTO_RELOAD=1 flask run ( sama kuin yläpuolella, pitää kirjoittaa joka 
+								     kerta, kun serverin käynnistää)
+
+- @app.route('/user/<name>')	(näyttää osoiterivillä: localhost:5000/user/tero)
+				(def user(name): return "<h1>Hello {} (<- tähän tulee nimi näkyviin)!!!</h1>.format(name) 
+
+- templates-kansion sisälle:	(index.html, def index(): return render_template('index.html') Hakee tiedot index.html-
+				tiedostosta, eikä defin alla olevasta tekstistä
+				 user.html: <h1> hello {{ name }}</h1> (tässä nimi tulee hello.py muuttujasta:
+				 return render_template('user.html', name=name).
+
+				<h1> hello {{ name|upper }}</h1>	= hello TERO
+				<h1> hello {{ name|lower }}</h1>	= hello tero
+				<h1> hello {{ name|capitalize }}</h1>	= hello Tero
+
+Muuttujan kautta nimi .py:	first_name = "Tero"
+				return render_template('index.html', first_name=first_name)
+				stuff = "This is <strong>Bold</strong> Text" (näyttää html-tiedostossa
+				html-koodin, mikä ei hyväksyttävää, pitää käyttää safe-filtteriä)
+				
+				favorite_pizza = ["pepperoni", "Onion", "Cheese", "Bell Pepper", 41] (Näyttää
+				listan html-tiedostossa
+
+index.html -tidostossa:		<p>My name is {{ first_name }}</p>
+				<p>{{ stuff|safe }}</p> (|safe -filtteri poistaa html-koodin näkyvistä)
+				|title-filtteri muuttaa jokaisen sanan ensimmäisen kirjaimen isoksi
+
+				{{ favorite_pizza }} = ["pepperoni", "Onion", "Cheese", "Bell Pepper", 41]
+
+for-loopin käyttö html-
+tiedostossa:			{% for topping in favorite_pizza %} {{ topping }} {% endfor %}
+				(Yllä oleva tulostaa pizza listan seuraavasti:
+					Favorite Pizza:
+
+					pepperoni
+					Onion
+					Cheese
+					Bell Pepper
+					41
+				
+				{{ favorite_pizza.0 }} (tämä tulostaa listan ensimmäisen tuotteen)
+
+for ja if loopit:		{% for topping in favorite_pizza %} {% if topping == 41 %} {{ topping + 100
+				}}<br />
+				{% else %} {{ topping }} <br />
+				{% endif %} {% endfor %} (nämä tulostavat html-sivulle numeron 141
+
+Omat Error-sivustot:		Python:
+				--------
+				@app.errorhandler(404)
+
+				def page_not_found(e):
+    					return render_template('404.html'), 404
+
+				HTML
+				-----
+				<br />
+				<center>
+  				<h1>404 Error</h1>
+  				<p>Page Not Found - Try Again...</p>
+				</center>
+
+				Kun laitat vaikka osoitteen localhost:5000/join.html, tulee virhe-sivu näkyviin,
+				koska kyseistä sivustoa ei ole olemassa.
+
+Piilotetun .ssh-kansion
+luonti:				TÄRKEÄÄ!! Poista venv käytöstä, ssh-avaimen luonnin takia!
+
+				
+				- mene kotikansioon ja luo .ssh -kansio (. tekee kansiosta piilotetun)
+				GitBash: mkdir .ssh
+				- siirry kansioon .ssh (GitBash: cd .ssh)
+
+SSH-avaimen luonti:		ssh-keygen.exe
+				- kysyy seuraavaksi, minne tallennetaan, paina vain Enter
+				- kysyy salasanan luontia 2 kertaa, paina molempiin Enter
+				(Jos laitat salasanan, kysytään sitä joka kerta. Salasana ei tarpeellinen,
+				koska jo tarpeeksi turvallinen)
+				- .ssh kansiossa kaksi tiedostoa: id_rsa(yksityinen), id_rsa.pub(julkinen)
+				- id_rsa.pub tarvitaan HitHubia varten
+				- avaimen saa näkyviin komennolla: cat id_rsa.pub
+				- kopioi avain, kun on näkyvissä
+
+SSH-avaimen käyttöön otto
+GitHubissa			- Mene osoitteeseen: github.com
+				- Oma profiili -> settings -> SSH and GPG keys
+				- New SSH key(oikea yläkulma, vihreällä pohjalla)
+				- Liitä kopioitu avain tekstikenttään
+				- Github pyytää salasanaa, syötä se ja näet uuden ssh-avaimen
+				- Jatkossa kun käytät githubia terminaalista, se käyttää tätä avainta
+				
+.gitignore:			- Mene takaisin työjakemistoon
+				- Virtuaalikansiota ei tarvitse laittaa githubiin
+				- luo .gitignore -tiedosto, johon lisätään venv, jotta sitä ei siirretä
+				  muiden tiedostojen mukana
+				- .gitignoren luonti: touch .gitignore (GitBash terminaali)
+				- .gitignoren voi luoda myös suoraan esim. vscodessa
+				- avaa .gitignore -tiedosto vscodessa ja lisää seuraavat rivit:
+						
+						.gitignore
+
+						virt/ (oma virtuaalikansiosi, esim env tai venv/)
+
+Git Versionhallinta:		SEURAAVAT VAIHEET TEHTÄVÄ JOKAISEN UUDEN PROJEKTIN LUONNIN YHTEYDESSÄ:
+
+				- Aktivoi virtuaaliympäristö (jos käytössä)
+
+				1. git config --global user.name "Your Name" (Oma nimesi)
+				2. git config --global user.email "you@youraddress.com" (Oma githubin sähköposti)
+				3. git config --global push.default matching
+				4. git config --global alias.co checkout
+				5. git init
+					Tyhjä Repository luotu!
+
+Repositoryn aktivointi:		- git add .
+				- git commit -am 'viesti' (kertoo, mitä tehty)
+				- 
+
+				
+				
+				
