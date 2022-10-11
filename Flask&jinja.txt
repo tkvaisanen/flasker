@@ -121,7 +121,10 @@ Git Versionhallinta:		SEURAAVAT VAIHEET TEHTÄVÄ JOKAISEN UUDEN PROJEKTIN LUONN
 
 Repositoryn aktivointi:		- git add .
 				- git commit -am 'viesti' (kertoo, mitä tehty)
-				- 
+
+Repositoryn asennus GitHubissa
+(tämä tehdään vain kerran!)	- klikkaa oma profiili -> Your Repositories -> New
+				- Nimeä Repo			
 
 				
 				
