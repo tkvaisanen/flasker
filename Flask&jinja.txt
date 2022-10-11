@@ -124,7 +124,7 @@ Repositoryn aktivointi:		- git add .
 
 Repositoryn asennus GitHubissa
 (tämä tehdään vain kerran!)	- klikkaa oma profiili -> Your Repositories -> New
-				- Nimeä Repo			
+				- Nimeä Repo ja seuraa ohjeita			
 
 				
 				
