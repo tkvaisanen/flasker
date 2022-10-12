@@ -11,14 +11,16 @@ FLASK_APP=hello.py FLASK_DEBUG=1 TEMPLATES_AUTO_RELOAD=1 flask run ( sama kuin y
 - @app.route('/user/<name>')	(näyttää osoiterivillä: localhost:5000/user/tero)
 				(def user(name): return "<h1>Hello {} (<- tähän tulee nimi näkyviin)!!!</h1>.format(name) 
 
-- templates-kansion sisälle:	(index.html, def index(): return render_template('index.html') Hakee tiedot index.html-
-				tiedostosta, eikä defin alla olevasta tekstistä
-				 user.html: <h1> hello {{ name }}</h1> (tässä nimi tulee hello.py muuttujasta:
-				 return render_template('user.html', name=name).
+- templates-kansion sisälle:	(index.html, (python)def index(): return render_template('index.html')
+				Hakee tiedot index.html-tiedostosta, eikä defin alla olevasta tekstistä
+				user.html: <h1> hello {{ name }}</h1> (tässä nimi tulee <tiedosto>.py muuttujasta:
+				return render_template('user.html', name=name).
 
 				<h1> hello {{ name|upper }}</h1>	= hello TERO
 				<h1> hello {{ name|lower }}</h1>	= hello tero
 				<h1> hello {{ name|capitalize }}</h1>	= hello Tero
+
+- templates-kansio:		- base.html(pää malli, kaikki sivuston mallit ottaa tietoja tästä tiedostosta
 
 Muuttujan kautta nimi .py:	first_name = "Tero"
 				return render_template('index.html', first_name=first_name)
@@ -45,7 +47,7 @@ tiedostossa:			{% for topping in favorite_pizza %} {{ topping }} {% endfor %}
 					Bell Pepper
 					41
 				
-				{{ favorite_pizza.0 }} (tämä tulostaa listan ensimmäisen tuotteen)
+				{{ favorite_pizza.0 }} (tämä tulostaa listan ensimmäisen tuotteen, Pepperoni)
 
 for ja if loopit:		{% for topping in favorite_pizza %} {% if topping == 41 %} {{ topping + 100
 				}}<br />
@@ -124,7 +126,13 @@ Repositoryn aktivointi:		- git add .
 
 Repositoryn asennus GitHubissa
 (tämä tehdään vain kerran!)	- klikkaa oma profiili -> Your Repositories -> New
-				- Nimeä Repo ja seuraa ohjeita			
+				- Nimeä Repo ja seuraa ohjeita
+
+
+OMAN CSS:n LUONTI JA LINKITYS:	- Luo static kansioon css-kansio
+				- Luo style.css tiedosto
+				- <link href="{{ url_for('static', filename='css/style.css') }}"
+      				  rel="stylesheet"
 
 				
 				
