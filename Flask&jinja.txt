@@ -134,6 +134,9 @@ OMAN CSS:n LUONTI JA LINKITYS:	- Luo static kansioon css-kansio
 				- <link href="{{ url_for('static', filename='css/style.css') }}"
       				  rel="stylesheet" (tämä linkki base.html-tiedostoon)
 
+
+
+
 				
 				
 				
