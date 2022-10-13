@@ -10,6 +10,9 @@ FLASK_APP=hello.py FLASK_DEBUG=1 TEMPLATES_AUTO_RELOAD=1 flask run ( sama kuin y
 UPDATE:							cmd: set set FLASK_APP=hello, Bash: export FLASK_APP=hello = Kertoo FLaskille, missä tiedosto sijaitsee.
 								Tämän jälkeen serverin voi käynnistää komennolla: flask run
 
+								flask --app main.py --debug run (tällä saa kanssas versiosta 3.0 flaskin automaatisesti päivittämään
+								koodin, kun tehdään muutoksia, main.py tietenkin oma tidostosi.py)
+
 - @app.route('/user/<name>')	(näyttää osoiterivillä: localhost:5000/user/tero)
 								(def user(name): return "<h1>Hello {} (<- tähän tulee nimi näkyviin)!!!</h1>.format(name) 
 

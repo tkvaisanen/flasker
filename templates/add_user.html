@@ -2,7 +2,7 @@
 get_flashed_messages() %}
 
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  Hey, {{ name }} - {{ message }}
+  {{ message }}
   <button
     type="button"
     class="btn-close"
@@ -26,7 +26,8 @@ get_flashed_messages() %}
      }}"
         >{{ our_user.name }}</a
       >
-      - {{ our_user.email }} - {{ our_user.favorite_color }}
+      - {{ our_user.email }} - {{ our_user.favorite_color }} -
+      <a href="{{ url_for('delete', id=our_user.id)}}">Delete</a>
     </td>
   </tr>
   {% endfor %}
@@ -64,8 +65,8 @@ get_flashed_messages() %}
         url_for('update', id=our_user.id)
        }}"
         >{{ our_user.name }}</a
-      >
-      - {{ our_user.email }} - {{ our_user.favorite_color }}
+      >- {{ our_user.email }} - {{ our_user.favorite_color }} -
+      <a href="{{ url_for('delete', id=our_user.id)}}">Delete</a>
     </td>
   </tr>
   {% endfor %}
